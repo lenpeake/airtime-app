@@ -1,0 +1,197 @@
+{
+  "appTitle": "AirTime",
+  "login": {
+    "title": "Iniciar sesión",
+    "emailPlaceholder": "Correo electrónico",
+    "passwordPlaceholder": "Contraseña",
+    "button": "Iniciar sesión",
+    "resetPasswordButton": "Enviar enlace de recuperación",
+    "resetInstruction": "Te enviaremos un enlace para restablecer tu contraseña.",
+    "errorTitle": "Error de inicio",
+    "successTitle": "Inicio de sesión exitoso",
+    "welcomeBack": "Bienvenido de nuevo",
+    "unknownResponseTitle": "Inicio de sesión",
+    "unknownResponse": "Respuesta inesperada del servidor.",
+    "pleaseLoginToContinue": "Inicia sesión para acceder a esta función.",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "alerts": {
+      "missingEmailTitle": "Correo faltante",
+      "missingEmailBody": "Por favor, introduce tu dirección de correo electrónico.",
+      "resetSentTitle": "Restablecimiento enviado",
+      "resetSentBody": "Revisa tu correo electrónico para restablecer tu contraseña.",
+      "resetErrorTitle": "Error",
+      "resetErrorBody": "No se pudo enviar el correo de restablecimiento.",
+      "requestFailed": "No se pudo enviar la solicitud de restablecimiento."
+    }
+  },
+  "signup": {
+    "title": "Crear nueva cuenta",
+    "button": "Crear cuenta",
+    "successTitle": "Registro exitoso",
+    "successMessage": "Revisa tu correo electrónico para confirmar.",
+    "errorTitle": "Error de registro"
+  },
+  "createAccount": {
+    "title": "Crear cuenta",
+    "firstName": "Nombre",
+    "lastName": "Apellido",
+    "preferredName": "Nombre preferido",
+    "zipcode": "Código postal",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "button": "Crear cuenta",
+    "backToLogin": "Volver a iniciar sesión",
+    "loading": "Preparando para despegar...",
+    "signupError": "Error al registrarse",
+    "profileError": "Error al guardar el perfil",
+    "missingFields": "Por favor complete los siguientes campos",
+    "loginError": "Error al iniciar sesión"
+  },
+  "logout": {
+    "button": "Cerrar sesión",
+    "confirmTitle": "¿Estás seguro?",
+    "confirmMessage": "¿Deseas cerrar sesión?",
+    "cancel": "Cancelar",
+    "confirm": "Cerrar sesión"
+  },
+  "optin": {
+    "title": "¡Ayuda a mejorar AirTime!",
+    "message": "¿Te gustaría informar tu tiempo de espera real después del control de seguridad?",
+    "notNow": "Ahora no",
+    "yes": "Sí"
+  },
+  "permissions": {
+    "title": "Permisos requeridos",
+    "message": "Activa las notificaciones y la ubicación para una mejor experiencia."
+  },
+  "details": {
+    "title": "Ahora mismo",
+    "hourlyEstimates": "Tiempo estimado por hora",
+    "precheck": "¿TSA Pre✓ disponible?",
+    "scrollHint": "Desliza para ver más horarios",
+    "available": "Disponible",
+    "notAvailable": "No disponible"
+  },
+  "lastUpdated": "Última actualización",
+  "input": {
+    "title": "Ingresa tu tiempo real de espera",
+    "label": "¿Cuántos minutos te tomó realmente?",
+    "button": "Enviar",
+    "invalidTitle": "Entrada inválida",
+    "invalidMessage": "Por favor ingresa un número.",
+    "lineTypeLabel": "Selecciona el tipo de fila"
+  },
+  "error": {
+    "title": "Error",
+    "message": "Algo salió mal. Intenta nuevamente."
+  },
+  "success": {
+    "title": "Éxito"
+  },
+  "thankyou": {
+    "message": "¡Gracias por mejorar AirTime!",
+    "sub": "Tu contribución ayuda a viajeros en todo el mundo.",
+    "button": "Volver al inicio",
+    "redirecting": "Redirigiendo en",
+    "lineTypeMessage": "¡Gracias por reportar el tiempo de espera en la fila {{lineType}}!"
+  },
+  "landing": {
+    "titleLine1": "Conoce Tu Espera",
+    "titleLine2": "Evita El Estrés",
+    "subtitle": "Tiempos de espera en seguridad en tiempo real en aeropuertos de todo el mundo. Preciso, rápido y colaborativo.",
+    "card1Title": "Tiempos en vivo",
+    "card1Text": "Estimaciones actualizadas de espera TSA antes de salir hacia el aeropuerto.",
+    "card2Title": "Reportes de usuarios",
+    "card2Text": "Únete a una red global de viajeros que comparten actualizaciones en tiempo real.",
+    "card3Title": "Notificaciones inteligentes",
+    "card3Text": "Te avisaremos si tu línea TSA está saturada, para que nunca te sorprendas.",
+    "button": "Crear nueva cuenta",
+    "statusGuest": "Explora AirTime. Inicia sesión para desbloquear funciones.",
+    "tapHint": "→ Toca para comenzar"
+  },
+  "header": {
+    "logout": "Cerrar Sesión",
+    "greeting": {
+      "morning": "Buenos Días",
+      "afternoon": "Buenas Tardes",
+      "evening": "Buenas Noches"
+    }
+  },
+  "airportSelection": {
+    "title": "Selecciona tu aeropuerto",
+    "placeholder": "Busca tu aeropuerto",
+    "confirmButton": "Continuar",
+    "alertMessage": "Selecciona un aeropuerto de la lista.",
+    "fetchError": "No se pudieron recuperar los tiempos de espera.",
+    "noResults": "No se encontraron aeropuertos. Prueba otra búsqueda."
+  },
+  "comingSoon": {
+    "title": "Próximamente",
+    "subtitle": "Estamos haciendo los últimos ajustes. ¡Vuelve pronto!"
+  },
+  "profile": {
+    "title": "Tu perfil",
+    "email": "Correo electrónico",
+    "firstName": "Nombre",
+    "lastName": "Apellido",
+    "zipcode": "Código postal",
+    "preferredName": "Nombre preferido",
+    "placeholder": "Ingresa tu nombre preferido",
+    "saveButton": "Guardar",
+    "savedMessage": "Gracias por actualizar tu nombre preferido",
+    "emailVerified": "✔ Correo verificado",
+    "emailNotVerified": "✖ Correo no verificado",
+    "resendVerification": "Reenviar verificación",
+    "verificationError": "No se pudo reenviar el correo de verificación.",
+    "verificationSent": "Correo de verificación reenviado."
+  },
+  "footer": {
+    "home": "Inicio",
+    "airport": "Aeropuerto",
+    "profile": "Perfil",
+    "reports": "Informes",
+    "copyright": "© {{year}} AirTime. Todos los derechos reservados."
+  },
+  "units": {
+    "minutes": "min"
+  },
+  "toggleLang": "English",
+  "common": {
+    "ok": "Aceptar"
+  },
+  "userReports": {
+    "title": "📡 Reportes de usuarios",
+    "description": "Esta función está en construcción.",
+    "comingSoon": "✨ Próximamente ✨",
+    "empty": "No hay reportes disponibles.",
+    "line": "Línea",
+    "estimated": "Estimado",
+    "actual": "Real",
+    "difference": "Diferencia"
+  },
+  "reminder": {
+    "title": "¿Ya pasaste seguridad?",
+    "message": "¿Cuál fue tu tiempo real de espera?",
+    "remindLater": "Preguntar en 5 minutos",
+    "submitNow": "Enviar tiempo"
+  },
+  "welcome": {
+    "greeting": "¡Bienvenido de nuevo, {{name}}!",
+    "firstTime": "¡Bienvenido a AirTime, {{name}}!"
+  },
+  "navigation": {
+    "selectAirport": "Selecciona tu aeropuerto",
+    "futureSuggestions": "Sugerencias futuras",
+    "airportDetails": "Detalles",
+    "login": "Iniciar sesión"
+  },
+  "notifications": {
+    "waitTimeTitle": "¿Cuánto tiempo te tomó realmente?",
+    "waitTimeBody": "Toca para enviar tu tiempo real de espera."
+  },
+  "smartNotifications": {
+    "title": "📲 Notificaciones Inteligentes",
+    "description": "Esta función está actualmente en construcción y te notificará cuando los tiempos de espera en el aeropuerto aumenten inesperadamente.",
+    "comingSoon": "✨ Próximamente ✨"
+  }
+}

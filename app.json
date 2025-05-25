@@ -7,23 +7,47 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
+    
     "splash": {
-      "image": "./assets/splash-icon.png",
+      "image": "./assets/Textured_Transparent_Logo_1.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#000000"
     },
+    "assetBundlePatterns": [
+      "assets/*"
+    ],
+
+    "plugins": [
+      "expo-localization",
+      "expo-splash-screen"
+    ],
+
     "ios": {
       "supportsTablet": true
     },
+
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.lenpeake.AirTimeApp_V2"
     },
+
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+
+    "packagerOpts": {
+      "dev": true,
+      "lanType": "tunnel"
+    },
+
+    "extra": {
+      "eas": {
+        "projectId": "357eb33a-cb89-4a43-a3d9-690fc99a5995"
+      }
     }
   }
 }

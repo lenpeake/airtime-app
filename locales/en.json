@@ -1,0 +1,197 @@
+{
+  "appTitle": "AirTime",
+  "login": {
+    "title": "Login",
+    "emailPlaceholder": "Email",
+    "passwordPlaceholder": "Password",
+    "button": "Login",
+    "resetPasswordButton": "Send Reset Link",
+    "resetInstruction": "We will email you a link to reset your password.",
+    "errorTitle": "Login Error",
+    "successTitle": "Login Successful",
+    "welcomeBack": "Welcome Back",
+    "unknownResponseTitle": "Login",
+    "unknownResponse": "Unexpected response from server.",
+    "pleaseLoginToContinue": "Please log in to access this feature.",
+    "forgotPassword": "Forgot Password?",
+    "alerts": {
+      "missingEmailTitle": "Missing Email",
+      "missingEmailBody": "Please enter your email address first.",
+      "resetSentTitle": "Password Reset Sent",
+      "resetSentBody": "Check your email for a link to reset your password.",
+      "resetErrorTitle": "Error",
+      "resetErrorBody": "Unable to send reset email.",
+      "requestFailed": "Failed to send reset request."
+    }
+  },
+  "signup": {
+    "title": "Create New Account",
+    "button": "Create Account",
+    "successTitle": "Sign Up Successful",
+    "successMessage": "Check your email for confirmation.",
+    "errorTitle": "Sign Up Error"
+  },
+  "createAccount": {
+    "title": "Create Account",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "preferredName": "Preferred Name",
+    "zipcode": "Zip Code",
+    "email": "Email",
+    "password": "Password",
+    "button": "Create Account",
+    "backToLogin": "Back to Login",
+    "loading": "Cleared for takeoff...",
+    "signupError": "Signup Error",
+    "profileError": "Profile Error",
+    "missingFields": "Please fill out the following fields",
+    "loginError": "Login Failed"
+  },
+  "logout": {
+    "button": "Logout",
+    "confirmTitle": "Are you sure?",
+    "confirmMessage": "Do you want to log out of your account?",
+    "cancel": "Cancel",
+    "confirm": "Logout"
+  },
+  "optin": {
+    "title": "Help Improve AirTime!",
+    "message": "Would you like to report your actual wait time after security?",
+    "notNow": "Not now",
+    "yes": "Yes"
+  },
+  "permissions": {
+    "title": "Permissions Required",
+    "message": "Please enable notifications and location services for optimal experience."
+  },
+  "details": {
+    "title": "Right Now",
+    "hourlyEstimates": "Estimated Wait by Hour",
+    "precheck": "TSA Pre✓ Available?",
+    "scrollHint": "Scroll for more times",
+    "available": "Available",
+    "notAvailable": "Not Available"
+  },
+  "lastUpdated": "Last Updated",
+  "input": {
+    "title": "Submit Your Actual Wait Time",
+    "label": "How many minutes did it actually take?",
+    "button": "Submit",
+    "invalidTitle": "Invalid input",
+    "invalidMessage": "Please enter a number.",
+    "lineTypeLabel": "Select Line Type"
+  },
+  "error": {
+    "title": "Error",
+    "message": "Something went wrong. Please try again."
+  },
+  "success": {
+    "title": "Success"
+  },
+  "thankyou": {
+    "message": "Thank you for improving AirTime!",
+    "sub": "Your submission helps travelers all over the world.",
+    "button": "Return to Home",
+    "redirecting": "Redirecting in",
+    "lineTypeMessage": "Thank you for reporting your\n{{lineType}} wait time!"
+  },
+  "landing": {
+    "titleLine1": "Know Your Wait",
+    "titleLine2": "Skip the Stress",
+    "subtitle": "Real-time security wait times at airports worldwide. Crowd-sourced, accurate, and fast. Plan your airport journey with confidence.",
+    "card1Title": "Live Wait Times",
+    "card1Text": "Up-to-the-minute TSA wait estimates before you even leave for the airport.",
+    "card2Title": "User Reports",
+    "card2Text": "Join a global network of travelers helping each other by sharing real-time updates.",
+    "card3Title": "Smart Notifications",
+    "card3Text": "We’ll alert you if your airport line is surging—so you’re never caught off guard.",
+    "button": "Create New Account",
+    "statusGuest": "Explore AirTime. Login to unlock features.",
+    "tapHint": "→ Tap to begin"
+  },
+  "header": {
+    "logout": "Logout",
+    "greeting": {
+      "morning": "Good Morning",
+      "afternoon": "Good Afternoon",
+      "evening": "Good Evening"
+    }
+  },
+  "airportSelection": {
+    "title": "Choose Your Airport",
+    "placeholder": "Search for your airport",
+    "confirmButton": "Continue",
+    "alertMessage": "Please choose an airport from the list.",
+    "fetchError": "Unable to retrieve wait times.",
+    "noResults": "No airports found. Try a different search."
+  },
+  "comingSoon": {
+    "title": "Coming Soon",
+    "subtitle": "We're putting on the final touches. Stay tuned!"
+  },
+  "profile": {
+    "title": "Your Profile",
+    "email": "Email",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "zipcode": "Zip Code",
+    "preferredName": "Preferred Name",
+    "placeholder": "Enter your preferred name",
+    "saveButton": "Save",
+    "savedMessage": "Thank you for updating Preferred Name",
+    "emailVerified": "✔ Email Verified",
+    "emailNotVerified": "✖ Email Not Verified",
+    "resendVerification": "Resend Verification",
+    "verificationError": "Failed to resend verification email.",
+    "verificationSent": "Verification email resent."
+  },
+  "footer": {
+    "home": "Home",
+    "airport": "Airport",
+    "profile": "Profile",
+    "reports": "Reports",
+    "copyright": "© {{year}} AirTime. All rights reserved."
+  },
+  "units": {
+    "minutes": "min"
+  },
+  "toggleLang": "Español",
+  "common": {
+    "ok": "OK"
+  },
+  "userReports": {
+    "title": "📡 User Reports",
+    "description": "This feature is currently under construction.",
+    "comingSoon": "✨ Coming Soon ✨",
+    "empty": "No reports available.",
+    "line": "Line",
+    "estimated": "Estimated",
+    "actual": "Actual",
+    "difference": "Difference"
+  },
+  "reminder": {
+    "title": "Are you through security?",
+    "message": "What was your actual wait time?",
+    "remindLater": "Ask in 5 minutes",
+    "submitNow": "Submit Time"
+  },
+  "welcome": {
+    "greeting": "Welcome back, {{name}}!",
+    "firstTime": "Welcome to AirTime, {{name}}!"
+  },
+  "navigation": {
+    "selectAirport": "Select Airport",
+    "futureSuggestions": "Future Suggestions",
+    "airportDetails": "Details",
+    "login": "Login"
+  },
+  "notifications": {
+    "waitTimeTitle": "How long did it actually take?",
+    "waitTimeBody": "Tap to submit your real wait time."
+  },
+  "smartNotifications": {
+    "title": "📲 Smart Notifications",
+    "description": "This feature is currently under construction and will notify you when airport wait times surge unexpectedly.",
+    "comingSoon": "✨ Coming Soon ✨"
+  }
+}
