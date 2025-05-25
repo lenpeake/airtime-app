@@ -39,3 +39,11 @@ yarn-error.*
 # Environment variables
 .env
 .env.*
+
+# VS Code settings (optional)
+.vscode/
+
+# EAS build outputs
+*.apk
+*.aab
+*.ipa
