@@ -1,3 +1,4 @@
+// components/Header.js
 import React, { useRef } from 'react';
 import {
   View,
@@ -49,9 +50,8 @@ export default function Header() {
         onPress: async () => {
           await signOut();
 
-          // 🔥 Clear the stored selected airport
           try {
-            await AsyncStorage.removeItem('lastSelectedAirport');
+            await SecureStore.deleteItemAsync('lastSelectedAirport');
           } catch (err) {
             console.warn('❌ Failed to clear stored airport:', err);
           }
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'flex-start',
-    paddingLeft: 0, // ✅ remove offset — true flush left
+    paddingLeft: 0,
   },
   logoWrapper: {
     justifyContent: 'center',

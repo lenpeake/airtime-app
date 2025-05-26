@@ -15,7 +15,7 @@ import * as Animatable from 'react-native-animatable';
 import { FontAwesome } from '@expo/vector-icons';
 import { useAuth } from './AuthContext';
 import { useTranslation } from 'react-i18next';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as SecureStore from 'expo-secure-store';
 
 export default function ScreenWithHeaderFooter({ children, noScroll = false }) {
   const navigation = useNavigation();
@@ -109,7 +109,7 @@ export default function ScreenWithHeaderFooter({ children, noScroll = false }) {
           }
 
           try {
-            const json = await AsyncStorage.getItem('lastSelectedAirport');
+            const json = await SecureStore.getItemAsync('lastSelectedAirport');
             if (json) {
               const { airportCode, airportName, waitTimes } = JSON.parse(json);
               navigation.navigate('AirportDetails', { airportCode, airportName, waitTimes });

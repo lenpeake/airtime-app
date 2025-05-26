@@ -1,6 +1,7 @@
 // App.js
 import './i18n-setup';
 import React, { useEffect, useState } from 'react';
+import { View, Text } from 'react-native';
 import * as Font from 'expo-font';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -33,9 +34,11 @@ const Stack = createStackNavigator();
 
 function AppInner() {
   const [appReady, setAppReady] = useState(false);
+  const [fontError, setFontError] = useState(null);
 
   useEffect(() => {
     const loadFonts = async () => {
+      console.log('⏳ Loading fonts...');
       try {
         await Font.loadAsync({
           Inter: require('./assets/fonts/Inter_18pt-Regular.ttf'),
@@ -43,8 +46,10 @@ function AppInner() {
           CormorantGaramond: require('./assets/fonts/CormorantGaramond-Regular.ttf'),
           'PlayfairDisplay-Bold': require('./assets/fonts/PlayfairDisplay-Bold.ttf'),
         });
+        console.log('✅ Fonts loaded');
       } catch (e) {
-        console.warn('Font loading failed:', e);
+        console.error('❌ Font loading failed:', e);
+        setFontError(e);
       } finally {
         setAppReady(true);
       }
@@ -55,12 +60,26 @@ function AppInner() {
 
   useEffect(() => {
     if (appReady) {
+      console.log('🚀 App is ready, requesting permissions');
       requestNotificationPermission();
       requestLocationPermission();
     }
   }, [appReady]);
 
-  if (!appReady) return null;
+  if (!appReady) {
+    console.log('⌛ App not ready yet...');
+    return null;
+  }
+
+  if (fontError) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text style={{ color: 'red', fontSize: 16, textAlign: 'center' }}>
+          Error loading fonts. Please restart the app.
+        </Text>
+      </View>
+    );
+  }
 
   return (
     <NavigationContainer>

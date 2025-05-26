@@ -1,7 +1,7 @@
 // components/AuthContext.js
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { auth } from './supabase';
+import * as SecureStore from 'expo-secure-store';
+import { supabase } from './supabase'; // your REST-based client using fetch
 
 const AuthContext = createContext();
 
@@ -9,57 +9,51 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // 🔐 Save session
-  const setSession = async (sessionData) => {
-    const token = sessionData?.access_token;
-    const user = sessionData?.user;
-    if (token && user) {
-      await AsyncStorage.setItem('user_session', JSON.stringify({
-        access_token: token,
-        user: {
-          id: user.id,
-          email: user.email,
-      // add more fields here if needed
-        },
-      }));
+  // 🔐 Save session securely
+  const setSession = async (session) => {
+    try {
+      const token = session?.access_token;
+      const userInfo = session?.user;
+      if (token && userInfo) {
+        await SecureStore.setItemAsync('user_session', JSON.stringify({
+          access_token: token,
+          user: {
+            id: userInfo.id,
+            email: userInfo.email,
+          },
+        }));
+        setUser(userInfo);
+      }
+    } catch (err) {
+      console.error('❌ Failed to save session:', err);
     }
-    setUser(user);
   };
 
-  // 🚪 Logout
+  // 🚪 Sign out
   const signOut = async () => {
-    await AsyncStorage.removeItem('user_session');
-    setUser(null);
+    try {
+      await SecureStore.deleteItemAsync('user_session');
+      setUser(null);
+    } catch (err) {
+      console.error('❌ Failed to sign out:', err);
+    }
   };
 
-  // 🚀 Restore session on startup
+  // 🧠 Restore session on startup
   useEffect(() => {
     const restoreSession = async () => {
       try {
-        const stored = await AsyncStorage.getItem('user_session');
+        const stored = await SecureStore.getItemAsync('user_session');
         if (stored) {
           const parsed = JSON.parse(stored);
+          const { access_token, user } = parsed;
 
-          const result = await auth.setSession({
-            access_token: parsed.access_token,
-          });
+          // 🔁 Optionally validate token via Supabase here if needed
 
-          if (result?.data?.user) {
-            setUser(result.data.user);
-
-            await AsyncStorage.setItem('user_session', JSON.stringify({
-              access_token: result.data.session.access_token,
-              user: {
-                id: result.data.user.id,
-                email: result.data.user.email,
-              },
-            }));
-          } else {
-            console.warn('⚠️ Supabase session was not restored');
-          }
+          setUser(user);
         }
       } catch (err) {
-        console.error('❌ Failed to restore session:', err);
+        console.error('❌ Error restoring session:', err);
       } finally {
         setLoading(false);
       }

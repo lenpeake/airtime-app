@@ -1,41 +1,43 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Localization from 'expo-localization';
+import * as SecureStore from 'expo-secure-store';
 
 import en from './locales/en.json';
 import es from './locales/es.json';
 
 console.log('🟡 i18n-setup.js is running...');
 
-// ✅ Define FORCE_LANGUAGE at the top
-const FORCE_LANGUAGE = true;
+const FORCE_LANGUAGE = false;
 
 const languageDetector = {
   type: 'languageDetector',
   async: true,
-  detect: (callback) => {
-    AsyncStorage.getItem('preferredLanguage')
-      .then((language) => {
-        console.log('🌐 Detected preferredLanguage from AsyncStorage:', language);
-        if (language) {
-          callback(language);
-        } else {
-          const fallback = Localization.locale.startsWith('es') ? 'es' : 'en';
-          console.log('🌍 No saved language, falling back to device locale:', fallback);
-          callback(fallback);
-        }
-      })
-      .catch((error) => {
-        console.warn('❌ Language detection failed:', error);
-        callback('en');
-      });
+  detect: async (callback) => {
+    try {
+      const storedLang = await SecureStore.getItemAsync('preferredLanguage');
+      console.log('🌐 Stored preferredLanguage:', storedLang);
+      if (storedLang) {
+        callback(storedLang);
+        return;
+      }
+    } catch (err) {
+      console.warn('⚠️ SecureStore read failed:', err);
+    }
+
+    // Fallback to device locale
+    const fallback = Localization.locale?.startsWith('es') ? 'es' : 'en';
+    console.log('🌍 Using fallback locale:', fallback);
+    callback(fallback);
   },
   init: () => {},
-  cacheUserLanguage: (lng) => {
-    AsyncStorage.setItem('preferredLanguage', lng).catch((e) =>
-      console.warn('⚠️ Failed to cache language:', e)
-    );
+  cacheUserLanguage: async (lng) => {
+    try {
+      await SecureStore.setItemAsync('preferredLanguage', lng);
+      console.log('💾 Cached language:', lng);
+    } catch (e) {
+      console.warn('⚠️ Failed to cache language:', e);
+    }
   },
 };
 
@@ -43,10 +45,9 @@ i18n
   .use(languageDetector)
   .use(initReactI18next)
   .init({
-    lng: FORCE_LANGUAGE ? 'en' : undefined, // ✅ Declared constant
+    lng: FORCE_LANGUAGE ? 'en' : undefined,
     compatibilityJSON: 'v3',
     fallbackLng: 'en',
-    nsSeparator: false,
     resources: {
       en: { translation: { ...en } },
       es: { translation: { ...es } },

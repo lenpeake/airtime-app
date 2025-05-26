@@ -1,6 +1,6 @@
 // utils/Notifications.js
 import * as Notifications from 'expo-notifications';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as SecureStore from 'expo-secure-store';
 import * as Device from 'expo-device';
 import Constants from 'expo-constants';
 
@@ -10,7 +10,7 @@ import Constants from 'expo-constants';
  */
 export async function requestNotificationPermissionOnce() {
   try {
-    const alreadyAsked = await AsyncStorage.getItem('notificationPermissionAsked');
+    const alreadyAsked = await SecureStore.getItemAsync('notificationPermissionAsked');
     if (alreadyAsked === 'true') return;
 
     // ✅ Skip if Firebase is not initialized or if running in Expo Go
@@ -19,7 +19,7 @@ export async function requestNotificationPermissionOnce() {
       Constants.appOwnership === 'expo'
     ) {
       console.warn('📵 Firebase not initialized. Skipping push setup.');
-      await AsyncStorage.setItem('notificationPermissionAsked', 'true');
+      await SecureStore.setItemAsync('notificationPermissionAsked', 'true');
       return;
     }
 
@@ -29,7 +29,7 @@ export async function requestNotificationPermissionOnce() {
       await Notifications.getExpoPushTokenAsync(); // Optional
     }
 
-    await AsyncStorage.setItem('notificationPermissionAsked', 'true');
+    await SecureStore.setItemAsync('notificationPermissionAsked', 'true');
   } catch (error) {
     console.warn('⚠️ Push notification error suppressed:', error.message);
   }

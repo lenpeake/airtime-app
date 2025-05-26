@@ -1,6 +1,6 @@
-// components/PreferredNameContext.js
+// components/PreferredNameContext.js — EAS-compatible version
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as SecureStore from 'expo-secure-store';
 import { getProfile } from '../utils/getProfile';
 import { useAuth } from './AuthContext';
 import { auth } from './supabase';
@@ -17,9 +17,9 @@ export const PreferredNameProvider = ({ children }) => {
   const setPreferredName = async (name) => {
     setPreferredNameState(name);
     if (name) {
-      await AsyncStorage.setItem('preferred_name', name);
+      await SecureStore.setItemAsync('preferred_name', name);
     } else {
-      await AsyncStorage.removeItem('preferred_name');
+      await SecureStore.deleteItemAsync('preferred_name');
     }
   };
 
@@ -27,8 +27,8 @@ export const PreferredNameProvider = ({ children }) => {
     if (authLoading) return;
 
     const loadPreferredName = async () => {
-      const cachedPreferred = await AsyncStorage.getItem('preferred_name');
-      const cachedFirst = await AsyncStorage.getItem('first_name');
+      const cachedPreferred = await SecureStore.getItemAsync('preferred_name');
+      const cachedFirst = await SecureStore.getItemAsync('first_name');
 
       console.log('📦 Cached preferred:', cachedPreferred);
       console.log('📦 Cached first:', cachedFirst);
@@ -52,19 +52,19 @@ export const PreferredNameProvider = ({ children }) => {
           if (preferred_name) {
             console.log('✅ Setting preferred_name:', preferred_name);
             setPreferredNameState(preferred_name);
-            await AsyncStorage.setItem('preferred_name', preferred_name);
+            await SecureStore.setItemAsync('preferred_name', preferred_name);
           }
 
           if (first_name) {
             console.log('✅ Setting first_name:', first_name);
             setFirstName(first_name);
-            await AsyncStorage.setItem('first_name', first_name);
+            await SecureStore.setItemAsync('first_name', first_name);
           }
         }
       } else {
         console.log('⚠️ No user. Clearing names from cache.');
-        await AsyncStorage.removeItem('preferred_name');
-        await AsyncStorage.removeItem('first_name');
+        await SecureStore.deleteItemAsync('preferred_name');
+        await SecureStore.deleteItemAsync('first_name');
         setPreferredNameState('');
         setFirstName('');
       }

@@ -7,7 +7,7 @@ import {
   Alert,
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as SecureStore from 'expo-secure-store';
 import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from './AuthContext';
@@ -25,13 +25,15 @@ export default function LandingPage() {
   const [comingSoonVisible, setComingSoonVisible] = useState(false);
 
   useEffect(() => {
-    AsyncStorage.getItem('seenLiveHint').then(value => {
-      if (!value) {
-        setShowTapHint(true);
-        AsyncStorage.setItem('seenLiveHint', 'yes');
-        setTimeout(() => setShowTapHint(false), 6000);
-      }
-    });
+    SecureStore.getItemAsync('seenLiveHint').then(value => {
+    if (!value) {
+      setShowTapHint(true);
+      SecureStore.setItemAsync('seenLiveHint', 'yes');
+      setTimeout(() => setShowTapHint(false), 6000);
+    }
+  }).catch((err) => {
+    console.warn('⚠️ Failed to check hint status:', err);
+  });
   }, []);
 
   const handleRestrictedPress = () => {

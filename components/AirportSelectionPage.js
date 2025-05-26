@@ -1,3 +1,5 @@
+// AirportSelectionPage.js — EAS-Compatible with SecureStore
+
 import React, { useState, useEffect, useRef } from 'react';
 import {
   View,
@@ -10,14 +12,13 @@ import {
   Alert,
   ImageBackground,
 } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as SecureStore from 'expo-secure-store';
 import { scheduleWaitNotification } from '../utils/Notifications';
 import { useWaitTimeReminder } from '../components/WaitTimeReminderContext';
 import ScreenWithHeaderFooter from '../components/ScreenWithHeaderFooter';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from './AuthContext';
 import Constants from 'expo-constants';
-import { auth } from '../components/supabase';
 import { addToMonitoredAirportsIfNeeded } from '../utils/Backend';
 
 const SUPABASE_URL = Constants.expoConfig?.extra?.supabaseUrl || '';
@@ -45,7 +46,6 @@ export default function AirportSelectionPage({ navigation }) {
   const reminderContext = useWaitTimeReminder();
   const startReminder = reminderContext?.startReminder;
 
-  const [accessToken, setAccessToken] = useState(null);
   const [airports, setAirports] = useState([]);
   const [query, setQuery] = useState('');
   const [filteredAirports, setFilteredAirports] = useState([]);
@@ -59,18 +59,6 @@ export default function AirportSelectionPage({ navigation }) {
   }, [user]);
 
   useEffect(() => {
-    const fetchToken = async () => {
-      const session = await auth.getSession();
-      const token = session?.data?.session?.access_token;
-      setAccessToken(token);
-      console.log('📤 Using token for monitored_airports:', token);
-    };
-    fetchToken();
-  }, []);
-
-  if (!user) return null;
-
-  useEffect(() => {
     fetch(`${BASE_URL}/airports/${API_KEY}/json`)
       .then((response) => response.json())
       .then((data) => setAirports(data))
@@ -79,13 +67,17 @@ export default function AirportSelectionPage({ navigation }) {
 
   useEffect(() => {
     const loadStoredData = async () => {
-      const savedAirport = await AsyncStorage.getItem('lastAirport');
-      const savedLang = await AsyncStorage.getItem('preferredLanguage');
-      if (savedLang) i18n.changeLanguage(savedLang);
-      if (savedAirport) {
-        const airport = JSON.parse(savedAirport);
-        setQuery(`${airport.name} (${airport.code})`);
-        setSelectedAirport(airport);
+      try {
+        const savedAirport = await SecureStore.getItemAsync('lastAirport');
+        const savedLang = await SecureStore.getItemAsync('preferredLanguage');
+        if (savedLang) i18n.changeLanguage(savedLang);
+        if (savedAirport) {
+          const airport = JSON.parse(savedAirport);
+          setQuery(`${airport.name} (${airport.code})`);
+          setSelectedAirport(airport);
+        }
+      } catch (err) {
+        console.warn('⚠️ SecureStore read failed:', err);
       }
     };
     loadStoredData();
@@ -120,7 +112,7 @@ export default function AirportSelectionPage({ navigation }) {
     setQuery(`${airport.name} (${airport.code})`);
     setSelectedAirport(airport);
     setFilteredAirports([]);
-    await AsyncStorage.setItem('lastAirport', JSON.stringify(airport));
+    await SecureStore.setItemAsync('lastAirport', JSON.stringify(airport));
   };
 
   const handleConfirm = async () => {
@@ -131,7 +123,7 @@ export default function AirportSelectionPage({ navigation }) {
 
     setLoading(true);
     try {
-      await addToMonitoredAirportsIfNeeded(selectedAirport.code, accessToken);
+      await addToMonitoredAirportsIfNeeded(selectedAirport.code);
 
       const url = `${BASE_URL}/airport/${API_KEY}/${selectedAirport.code}/json`;
       const response = await fetch(url, {
@@ -166,10 +158,8 @@ export default function AirportSelectionPage({ navigation }) {
         console.warn('⚠️ Reminder function unavailable. Skipping reminder.');
       }
 
-      await AsyncStorage.setItem('preferredLanguage', i18n.language);
-
-      // ✅ Save the full selected airport object with waitTimes for reuse in footer
-      await AsyncStorage.setItem(
+      await SecureStore.setItemAsync('preferredLanguage', i18n.language);
+      await SecureStore.setItemAsync(
         'lastSelectedAirport',
         JSON.stringify({
           airportCode: selectedAirport.code,

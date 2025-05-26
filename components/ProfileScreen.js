@@ -5,7 +5,6 @@ import {
   Dimensions, Alert
 } from 'react-native';
 
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import { usePreferredName } from './PreferredNameContext';
 import ToastCard from './ToastCard';
@@ -120,7 +119,6 @@ export default function ProfileScreen() {
 
       if (!res.ok) throw new Error(await res.text());
 
-      await AsyncStorage.setItem('preferred_name', inputValue);
       setPreferredName(inputValue);
       setShowToast(true);
     } catch (err) {

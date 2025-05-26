@@ -1,6 +1,6 @@
-import 'dotenv/config';
+require('dotenv/config');
 
-export default {
+module.exports = {
   expo: {
     name: 'AirTimeApp',
     slug: 'AirTimeApp',
@@ -14,12 +14,21 @@ export default {
       backgroundColor: '#000000',
     },
     extra: {
+      eas: {
+        projectId: '40e28484-6751-49cc-b9a7-7c219d218414',
+      },
       supabaseUrl: process.env.SUPABASE_URL,
       supabaseAnonKey: process.env.SUPABASE_ANON_KEY,
       tsaApiKey: process.env.TSA_API_KEY,
     },
-    plugins: ['expo-localization', 'expo-splash-screen'],
-    ios: { supportsTablet: true },
+    plugins: [
+      'expo-localization',
+      'expo-splash-screen',
+      'expo-secure-store' // ✅ Added for SecureStore compatibility
+    ],
+    ios: {
+      supportsTablet: true,
+    },
     android: {
       adaptiveIcon: {
         foregroundImage: './assets/adaptive-icon.png',
@@ -29,6 +38,8 @@ export default {
       package: 'com.lenpeake.AirTimeApp_V2',
       googleServicesFile: './google-services.json',
     },
-    web: { favicon: './assets/favicon.png' },
+    web: {
+      favicon: './assets/favicon.png',
+    },
   },
 };

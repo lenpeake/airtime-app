@@ -16,9 +16,6 @@ import {
 
 import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
-
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
 import { useAuth } from './AuthContext';
 import { usePreferredName } from './PreferredNameContext';
 import { useWelcomeOverlay } from './WelcomeOverlay';
@@ -38,38 +35,43 @@ export default function LoginPage() {
   const { setSession } = useAuth();
 
   const handleLogin = async () => {
-    console.log('🚀 Login button pressed');
+  console.log('🚀 Login button pressed');
 
-    try {
-      const { data, error } = await auth.signInWithPassword({
-        email: email.trim().toLowerCase(),
-        password,
-      });
+  try {
+    const { data, error } = await auth.signInWithPassword({
+      email: email.trim().toLowerCase(),
+      password,
+    });
 
-      if (error || !data.session || !data.user) {
-        console.error('🟥 Login failed:', error);
-        Alert.alert('Login Failed', error?.message || 'Invalid credentials');
-        return;
-      }
-
-      const { session, user } = data;
-
-      setSession({ user });
-
-      await AsyncStorage.setItem('user_session', JSON.stringify({
-        access_token: session.access_token,
-        refresh_token: session.refresh_token,
-        user_id: user.id,
-      }));
-
-      await requestNotificationPermissionOnce();
-      navigation.navigate('LandingPage');
-
-    } catch (err) {
-      console.error('Login error:', err);
-      Alert.alert('Error', 'Unexpected error occurred.');
+    if (error || !data.session || !data.user) {
+      console.error('🟥 Login failed:', error);
+      Alert.alert('Login Failed', error?.message || 'Invalid credentials');
+      return;
     }
-  };
+
+    const { session, user } = data;
+
+    // ✅ Use the updated AuthContext session setter
+    await setSession({
+      access_token: session.access_token,
+      user: {
+        id: user.id,
+        email: user.email,
+      },
+    });
+
+    await requestNotificationPermissionOnce();
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'LandingPage' }],
+    });
+
+  } catch (err) {
+    console.error('Login error:', err);
+    Alert.alert('Error', 'Unexpected error occurred.');
+  }
+};
+
 
   return (
     <View style={styles.background}>
